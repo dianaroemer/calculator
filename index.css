@@ -1,5 +1,8 @@
-#container {
+body {
+    background-color: bisque;
+}
 
+#container {
     display: grid;
 
 }
@@ -11,22 +14,28 @@
     grid-template-columns: auto auto auto auto;
     grid-template-rows: auto auto auto auto auto;
 
-
-
 }
 
 .calc-btn {
     width: 40px;
     height: 40px;
-    
+    background-color: seashell;
+    border: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    margin: 2px;
 }
 
 #display {
     border:solid;
+    border-width: 2px;
+    border-radius: 6px;
+    padding: 5px;
     margin-top: 20px;
     margin-bottom: 20px;
     width: 200px;
     justify-self:center;
+    background-color: beige;
 }
 
 #cal-btn-backsp {
