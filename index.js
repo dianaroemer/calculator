@@ -1,5 +1,8 @@
 // To Do - 
-    // 1. Make math functions work
+    // 1. Add positive/negative button
+    // 2. Add the ability to input decimals
+    // 3. Toggle simplified vs complicated inputs
+        // a. Rebuild project based off of single number display
 
 
 // operate( a, b, c) takes an operator, a, and two numbers, and calls a representative function based on a switch statement from the operator
@@ -65,7 +68,6 @@ const results3 = document.querySelector('#results3');
 
 let displayContent = [];
 
-console.log(results.textContent);
 
 function updateDisplay() {
     display.textContent = '';
@@ -96,13 +98,8 @@ function parseButton (e) {
                 break;
             }
 
-
             results3.textContent = results2.textContent;
             results2.textContent = solve(displayContent);
-
-            console.log(`results = ${results.textContent}
-            results2 = ${results2.textContent}
-            results3 = ${results3.textContent}`);
 
             // solve(displayContent);
             break;
@@ -217,10 +214,7 @@ function solve( arr ) {
     rightNum = parseFloat(rightNum);
 
     // Solve current operation with leftNum, operator, rightNum    
-    // console.log(`This is ${leftNum} and this is ${rightNum} and this is the operator between them: ${foundOperator}.
-    // This is remainingInput: [${remainingInput}] and this is nextFoundIndex: ${nextFoundIndex}`);
     let operatedValue = operate(foundOperator, leftNum, rightNum);
-    console.log(operatedValue);
 
 
     // If remainingInput exists (i.e. nextFoundIndex != -1), recurse, using new array populated with previous operate number and remainingInput

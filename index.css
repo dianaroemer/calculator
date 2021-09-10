@@ -8,7 +8,6 @@ body {
 }
 
 #cal_container {
-
     display: grid;
     place-content: center center;
     grid-template-columns: auto auto auto auto;
@@ -21,10 +20,11 @@ body {
     height: 60px;
     background-color: seashell;
     border: solid;
-    border-width: 1px;
+    border-width: 1.5px;
     border-radius: 5px;
     margin: 2px;
     font-size:1.5em;
+    background-color: rgb(255, 240, 230);
 }
 
 #display {
@@ -43,6 +43,11 @@ body {
 #cal_btn_backsp {
     grid-area: 1 / 2 / 1 / 4;
     width: auto;
+    background-color: #bdbcbc;
+}
+
+#cal_btn_clear {
+    background-color: #bdbcbc;
 }
 
 #cal_btn_zero {
@@ -75,7 +80,7 @@ body {
     width: 200px;
     justify-self:center;
     background-color: beige;
-    height: 2.5em;
+    height: 2.75em;
     text-align: start;
     font-size: 1.5em;
 }
@@ -88,4 +93,24 @@ body {
 #results3 {
     font-size: .75em;
     text-align:end;
+}
+
+#cal_btn_plus {
+    background-color: #ebbcbc;
+}
+
+#cal_btn_minus {
+    background-color: #ebbcbc;
+}
+
+#cal_btn_multiply {
+    background-color: #ebbcbc;
+}
+
+#cal_btn_divide {
+    background-color: #ebbcbc;
+}
+
+#cal_btn_equals {
+    background-color: #ebbcbc;
 }
