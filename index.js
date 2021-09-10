@@ -114,16 +114,20 @@ function parseButton (e) {
 
     // displayContent.push(e.target.textContent[1]);
 
-    const btnVal = e.target.textContent[1];
+    const btnVal = e.target.dataset.value;
 
-    switch(btnVal) {
-        case "=":
+    const btnType = e.target.dataset.type;
+
+    // console.log(e.target.dataset.type);
+
+    switch(btnType) {
+        case "equals":
             //Do functionality regarding the equals and solve function
             console.log('This is the EQUALS button');
                 // Type checking functionality
                     // Don't perform equals operation if array is not in suitable format, eg equals without two inputs and one operator
             break;
-        case "a":
+        case "backspace":
             // Do functionality regarding Backspace
             console.log('This is the BACKSPACE button');
             if( displayContent.length > 0) {
@@ -131,25 +135,29 @@ function parseButton (e) {
             }
             // console.log(displayContent);
             break;
-        case "l":
+        case "clear":
             // Do functionality regarding CLEAR
             console.log('This is the CLEAR button');
             displayContent = [];
             break;
-        case ("+" || "-" || "%" || "*"):
+        case "operator":
             // Add operator to array
             console.log('This is an operator');
             // If previous element in array is operator, don't add operator
             // If array is empty, don't add operator
             if( displayContent.length > 0 ) {
+                // if previous element in array is an operator, don't add operator, instead overwrite latest operator with newest operator value (eg, press + after pressing - updates final array value to match -, instead of staying static on +)
+                let prev = displayContent[displayContent.length-1];
+                if ( prev == "+" || prev == "-" || prev == "*" || prev == "/") {
+                    displayContent[displayContent.length - 1] = btnVal;
+                    break;
+                }
                 displayContent.push(btnVal);
             }
             break;
         default:
-            // Do functionality to add clicked button to displayContent[]
-            // Type check last element in displayContent[]
-                // If last element is operator, don't push new element to array
-                // If this is first element in array, don't push operator
+            // Add button content to displayContent[]
+            // XXXUPDATEXXX Change this not to pull from text content, but instead from data-value, so I can change button textContent without changing the functionality of the button itself
             displayContent.push(btnVal);
             break;
     }
