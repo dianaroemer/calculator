@@ -59,17 +59,28 @@ function divide ( foo , bar ) {
 // ----------------------------- Display ---------------------------------------
 
 const display = document.querySelector('#display');
+const results = document.querySelector('#results');
+const results2 = document.querySelector('#results2');
+const results3 = document.querySelector('#results3');
+
 let displayContent = [];
 
+console.log(results.textContent);
 
 function updateDisplay() {
     display.textContent = '';
-
     displayContent.forEach( (element) => {
         display.textContent += element;
     });
 
+    let solved = solve(displayContent);
+    if(!isNaN(solved)) {
+
+        var textToChange = results.childNodes[0];
+        textToChange.nodeValue = solved;
+    }    
 }
+
 
 function parseButton (e) {
 
@@ -77,21 +88,23 @@ function parseButton (e) {
     const btnVal = e.target.dataset.value;
     const btnType = e.target.dataset.type;
 
-
     switch(btnType) {
         case "equals":
             //Do functionality regarding the equals and solve function
-            // console.log('This is the EQUALS button');
-            // Type checking functionality
-                // Don't perform equals operation if array is not in suitable format, eg equals without two inputs and one operator
-            // if( displayContent[displayContent])
-
-            console.log();
             let last = displayContent[displayContent.length-1];
             if( last == "+" || last == "-" || last == "*" || last == "/"){
                 break;
             }
-            solve(displayContent);
+
+
+            results3.textContent = results2.textContent;
+            results2.textContent = solve(displayContent);
+
+            console.log(`results = ${results.textContent}
+            results2 = ${results2.textContent}
+            results3 = ${results3.textContent}`);
+
+            // solve(displayContent);
             break;
         case "backspace":
             // Do functionality regarding Backspace
@@ -125,7 +138,7 @@ function parseButton (e) {
             break;
     }
 
-    console.log(displayContent);
+    // console.log(displayContent);
 
     // Update Display to show new input
     updateDisplay();
@@ -158,28 +171,40 @@ function solve( arr ) {
     let input = arguments[0];
     let length = input.length;
 
-    // Find operator in array
-    let found = input.find( element => element == "+" || element == "-" || element == "*" || element == "/");
-    let foundIndex = input.findIndex( element => element == "+" || element == "-" || element == "*" || element == "/");
-    // console.log(`This is found: ${found}, this is foundIndex: ${foundIndex}`);
+    let leftNum = '';
+    let rightNum = '';
 
-    // Determine next index of an operator, or return length
+    // Find operator in array
+    let foundOperator = input.find( element => element == "+" || element == "-" || element == "*" || element == "/");
+    let foundIndex = input.findIndex( element => element == "+" || element == "-" || element == "*" || element == "/");
+
+    // If no operator is found, return current displayContent as float
+    if ( foundIndex == -1 ){
+        for ( let i = 0; i < length; i++ ){
+            leftNum += input[i];
+        }
+        leftNum = parseFloat(leftNum);
+        return leftNum;
+    }
+
+    // If operator is found, create an array containing remaining elements
+    // Also find index of next operator
     let remainingInput = input.slice(foundIndex +1 , length);
     let nextFoundIndex = remainingInput.findIndex( element => element == "+" || element == "-" || element == "*" || element == "/");
+
+    remainingInput = remainingInput.slice(nextFoundIndex);
     // console.log(`Below is the remaining input`);
     // console.log(remainingInput);
     // console.log(`And this is nextFoundIndex: ${nextFoundIndex}`);
 
-    let leftNum = '';
-    let rightNum = '';
 
+    // Parse current array of leftNum, operator, rightNum
     for ( let i = 0; i < foundIndex; i++ ){
         leftNum += input[i];
     }
     leftNum = parseFloat(leftNum);
-
-    // Set up if statement - if nextFoundIndex exists, run the code as below
-    // Else, run the for ( i = foundIndex; i < length; i++)
+    // Set up if statement - if nextFoundIndex exists, iterate rightNum until nextFoundIndex
+    // Else, iterate rightNum until length
     if( nextFoundIndex != -1) {
         for(let i = foundIndex + 1; i <= nextFoundIndex + foundIndex; i++){
             rightNum += input[i];
@@ -191,10 +216,23 @@ function solve( arr ) {
     }
     rightNum = parseFloat(rightNum);
 
-    console.log(`This is ${leftNum} and this is ${rightNum} and this is the operator between them: ${found}`);
-    console.log(operate(found, leftNum, rightNum));
+    // Solve current operation with leftNum, operator, rightNum    
+    // console.log(`This is ${leftNum} and this is ${rightNum} and this is the operator between them: ${foundOperator}.
+    // This is remainingInput: [${remainingInput}] and this is nextFoundIndex: ${nextFoundIndex}`);
+    let operatedValue = operate(foundOperator, leftNum, rightNum);
+    console.log(operatedValue);
+
+
+    // If remainingInput exists (i.e. nextFoundIndex != -1), recurse, using new array populated with previous operate number and remainingInput
+    if ( nextFoundIndex != -1 ){
+        // console.log('There is a remaining input to be solved!');
+        let remainingArray = [operatedValue];
+        remainingInput.forEach(element => remainingArray.push(element));
+        // console.log(`This is remainingArray ${remainingArray}`);
+        return solve(remainingArray);
+    }
     
-    
+    return operatedValue;
 
     // Array cases
         // 1. Numbers, no operator

@@ -17,13 +17,14 @@ body {
 }
 
 .calc_btn {
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
     background-color: seashell;
     border: solid;
     border-width: 1px;
     border-radius: 5px;
     margin: 2px;
+    font-size:1.5em;
 }
 
 #display {
@@ -31,12 +32,12 @@ body {
     border-width: 2px;
     border-radius: 6px;
     padding: 5px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     width: 200px;
     justify-self:center;
     background-color: beige;
-    height: 4em;
+    height: 3em;
+    font-size: 1.5em;
 }
 
 #cal_btn_backsp {
@@ -52,4 +53,39 @@ body {
 #cal_btn_equals {
     grid-area: 5 / 3 / 5 / 5;
     width: auto;
+}
+
+#resultsLabel {
+    justify-self: center;
+    font-size: 1.5em;
+}
+
+#displayLabel {
+    justify-self: center;
+    font-size: 1.5em;
+    margin-top: 10px;
+}
+
+#results {
+    border:solid;
+    border-width: 2px;
+    border-radius: 6px;
+    padding: 5px;
+    margin-bottom: 20px;
+    width: 200px;
+    justify-self:center;
+    background-color: beige;
+    height: 2.5em;
+    text-align: start;
+    font-size: 1.5em;
+}
+
+#results2 {
+    font-size: .75em;
+    text-align:end;
+}
+
+#results3 {
+    font-size: .75em;
+    text-align:end;
 }
