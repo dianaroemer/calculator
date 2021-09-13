@@ -3,6 +3,7 @@
     // 2. Add the ability to input decimals
     // 3. Toggle simplified vs complicated inputs
         // a. Rebuild project based off of single number display
+    // 4. Rebuild complicated view to function more cleanly
 
 
 // operate( a, b, c) takes an operator, a, and two numbers, and calls a representative function based on a switch statement from the operator
@@ -76,11 +77,18 @@ function updateDisplay() {
     });
 
     let solved = solve(displayContent);
-    if(!isNaN(solved)) {
+    // Round to closest whole number
+    solved = solved.toFixed(0);
 
+
+    // Update results text value
+    if(!isNaN(solved)) {
         var textToChange = results.childNodes[0];
         textToChange.nodeValue = solved;
-    }    
+    } else if ( displayContent.length == 0 ) {
+        var textToChange = results.childNodes[0];
+        textToChange.nodeValue = '';
+    }
 }
 
 
@@ -98,8 +106,11 @@ function parseButton (e) {
                 break;
             }
 
+            let solved = solve(displayContent);
+            // Round to closest whole number
+            solved = solved.toFixed(0);
             results3.textContent = results2.textContent;
-            results2.textContent = solve(displayContent);
+            results2.textContent = solved;
 
             // solve(displayContent);
             break;
