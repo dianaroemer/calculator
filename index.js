@@ -85,7 +85,7 @@ function updateDisplay() {
     if(!isNaN(solved)) {
         var textToChange = results.childNodes[0];
         textToChange.nodeValue = solved;
-    } else if ( displayContent.length == 0 ) {
+    } else if ( displayContent.length === 0 ) {
         var textToChange = results.childNodes[0];
         textToChange.nodeValue = '';
     }
