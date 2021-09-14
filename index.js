@@ -92,6 +92,8 @@ function updateDisplay() {
 }
 
 
+// -------------------------- Parse Buttons ------------------------------------
+
 function parseButton (e) {
 
     // Add element to displayContent from e, passed from eventListener
@@ -109,8 +111,10 @@ function parseButton (e) {
             let solved = solve(displayContent);
             // Round to closest whole number
             solved = solved.toFixed(0);
-            results3.textContent = results2.textContent;
-            results2.textContent = solved;
+            if(!isNaN(solved)) {
+                results3.textContent = results2.textContent;
+                results2.textContent = solved;
+            }
 
             // solve(displayContent);
             break;
@@ -141,22 +145,7 @@ function parseButton (e) {
             }
             break;
         case "decimal":
-
-
             // If there is no decimal in current number, add a decimal, else do nothing
-            // Get current number
-            // Check current number for decimal
-
-            // Decimal array cases
-            // [] = okay
-            // [n, n, n, etc.] = okay
-            // [n, o] = okay
-            // [., n] = not okay
-
-            // if array is empty, add decimal
-            // if array is only numbers, add decimal
-            // if array ends with operator, add decimal
-            
             let currentNumber = [];
             
             for (let i = displayContent.length -1; i >= 0; i--) {
@@ -184,16 +173,10 @@ function parseButton (e) {
             break;
     }
 
-    console.log(displayContent);
+    // console.log(displayContent);
 
     // Update Display to show new input
     updateDisplay();
-}
-
-function getCurrentNumber() {
-
-    
-
 }
 
 
@@ -201,22 +184,80 @@ function getCurrentNumber() {
 const calc_btns = Array.from(document.querySelectorAll('.calc_btn'));
 calc_btns.forEach( button => button.addEventListener('click', parseButton));
 
+window.addEventListener('keydown', simulateClickEvent);
+
+function simulateClickEvent(e) {
+
+    // console.log(e.keyCode);
+    switch ( e.keyCode ) {
+        case 48:
+            document.getElementById('cal_btn_zero').click();
+            break;
+        case 49:
+            document.getElementById('cal_btn_one').click();
+            break;
+        case 50:
+            document.getElementById('cal_btn_two').click();
+            break;
+        case 51:
+            document.getElementById('cal_btn_three').click();
+            break;
+        case 52:
+            document.getElementById('cal_btn_four').click();
+            break;
+        case 53:
+            document.getElementById('cal_btn_five').click();
+            break;
+        case 54:
+            document.getElementById('cal_btn_six').click();
+            break;
+        case 55:
+            document.getElementById('cal_btn_seven').click();
+            break;
+        case 56:
+            if(e.shiftKey) {
+                document.getElementById('cal_btn_multiply').click();
+            } else {
+            document.getElementById('cal_btn_eight').click();
+            }
+            break;
+        case 57:
+            document.getElementById('cal_btn_nine').click();
+            break;
+            // ------------ Operators ------------
+        case 187:
+            if ( e.shiftKey) {
+                document.getElementById('cal_btn_plus').click();
+            } else {
+                document.getElementById('cal_btn_equals').click();
+            }
+            break;
+        case 189:
+            document.getElementById('cal_btn_minus').click();
+            break;
+        case 191:
+            document.getElementById('cal_btn_divide').click();
+            break;
+        case 13:
+            document.getElementById('cal_btn_equals').click();
+            break;
+        case 190:
+            document.getElementById('cal_btn_decimal').click();
+            break;
+        case 8:
+            document.getElementById('cal_btn_backsp').click();
+            break;
+        case 46:
+            document.getElementById('cal_btn_clear').click();
+            break;
+    }
+
+
+
+}
+
 
 // ----------------------------- Math ---------------------------------------
-
-// XXXUPDATEXXX
-// Solve the equation
-// Look at array each time a button is pressed and determine if the array is 'solveable'
-// if the array is solveable, show the current solveable value in the bottom of the display
-    // Per the README:
-    // If you enter a number then an operator and another number that calculation should be displayed if your next input is an operator. The result of the calculation should be used as the first number in your new calculation.
-
-// Each button press scan through array to find an operator
-    // If suitable operator is found, scan left to find suitable number, ending at displayContent[0]
-    // if suitable number is on left, scan right to find suitable number, ending at displayContent[displayContent.length] || operator
-    // Solve current operation, using operate ( operator, number left, number right)
-    // Place solved value into new array, and append any remaining values of array to the right, run solve on new Array
-    // Scan new array, looking for operator, numLeft, and numRight, then solve
 
 function solve( arr ) {
 
@@ -293,7 +334,7 @@ function solve( arr ) {
         // If case 2, return numbers
         // If case 3, perform solve function on numbers using operator, return finished value
         // If case 4, perform solve function recursively on self, passing the finished value from (3.) into new array, with remaining values of current array
-    // 
-
-
 }
+
+
+
