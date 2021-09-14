@@ -173,7 +173,7 @@ function parseButton (e) {
             break;
     }
 
-    console.log(displayContent);
+    // console.log(displayContent);
 
     // Update Display to show new input
     updateDisplay();
@@ -359,7 +359,7 @@ function pickCalc () {
         // Initialize Scientific variables to empty and default states
         displayContent = [];
         display.textContent = '';
-        results.textContent = '';
+        results.childNodes[0].nodeValue = '';
         results2.textContent = '';
         results3.textContent = '';
         display.style.marginBottom = "10px";
@@ -370,6 +370,7 @@ function pickCalc () {
         
         
     } else {
+        display.textContent = ''
         results.style.display = "none";
         resultsLabel.style.display = "none";
         displayLabel.style.display = "none";
