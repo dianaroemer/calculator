@@ -141,19 +141,41 @@ function parseButton (e) {
             }
             break;
         case "decimal":
-            const hasDecimal = displayContent.findIndex( element => {
-                element == ".";
-            })
-            console.log(hasDecimal);
 
-            if(hasDecimal == -1) {
-                displayContent.push(btnVal);
-            }
 
             // If there is no decimal in current number, add a decimal, else do nothing
             // Get current number
             // Check current number for decimal
-    
+
+            // Decimal array cases
+            // [] = okay
+            // [n, n, n, etc.] = okay
+            // [n, o] = okay
+            // [., n] = not okay
+
+            // if array is empty, add decimal
+            // if array is only numbers, add decimal
+            // if array ends with operator, add decimal
+            
+            let currentNumber = [];
+            
+            for (let i = displayContent.length -1; i >= 0; i--) {
+                
+                if( displayContent[i] == "+" ||  displayContent[i] == "-" ||  displayContent[i] == "*" ||  displayContent[i] == "/") {
+                    break;
+                }
+                currentNumber.push(displayContent[i]);
+            }
+            // console.log(currentNumber);
+            
+            const hasDecimal = currentNumber.findIndex( element => {
+                return element == ".";
+            })
+            // console.log(`This is the status of hasDecimal: ` + hasDecimal);
+            
+            if(hasDecimal == -1) {
+                displayContent.push(btnVal);
+            }
 
             break;
         default:
@@ -166,8 +188,14 @@ function parseButton (e) {
 
     // Update Display to show new input
     updateDisplay();
+}
+
+function getCurrentNumber() {
+
+    
 
 }
+
 
 // Add click eventListener to each button, passing parseButton
 const calc_btns = Array.from(document.querySelectorAll('.calc_btn'));
