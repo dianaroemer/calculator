@@ -339,12 +339,17 @@ function solve( arr ) {
 
 // ----------------------------- Toggle ---------------------------------------
 
-const scientificContainer = document.querySelector("#container");
+
+
 const toggle = document.querySelector("#switchValue");
+toggle.checked = true;
+
 const resultsLabel = document.getElementById('resultsLabel');
 const displayLabel = document.getElementById('displayLabel');
+const cal_btn_posneg = document.getElementById('cal_btn_posneg');
+const cal_btn_backsp = document.getElementById('cal_btn_backsp');
 
-toggle.checked = true;
+
 
 toggle.addEventListener('click', pickCalc);
 
@@ -355,6 +360,8 @@ function pickCalc () {
         results.style.display = "inherit";
         resultsLabel.style.display = "inherit";
         displayLabel.style.display = "inherit";
+        cal_btn_backsp.style.gridArea = "1 / 2 / 1 / 4";
+        cal_btn_posneg.style.display = "none";
 
         // Initialize Scientific variables to empty and default states
         displayContent = [];
@@ -375,6 +382,9 @@ function pickCalc () {
         resultsLabel.style.display = "none";
         displayLabel.style.display = "none";
         display.style.marginBottom = "0px";
+        cal_btn_posneg.style.display = "inline-block";
+        cal_btn_backsp.style.gridArea = "auto";
+
 
         // Initialize Simplified variables to empty and default states 
         // XXXUPDATEXXX
@@ -387,4 +397,11 @@ function pickCalc () {
     }
 
 }
+
+// -------------------------- Parse Simp Buttons ----------------------------
+
+// Intake user input via button or click
+// Parse if button is legal button press
+// If legal button press, render calculator engine to accomodate new state
+// After new state is rendered, update display
 

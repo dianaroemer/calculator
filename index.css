@@ -127,7 +127,12 @@ input:checked + .slider:before {
     background-color: #bdbcbc;
 }
 
-#cal_btn_clear {
+/* #cal_btn_backsp:after {
+    grid-area: 1 / 2 / 1 / 3;
+    display:none;
+} */
+
+#cal_btn_clear, #cal_btn_posneg {
     background-color: #bdbcbc;
 }
 
@@ -170,3 +175,7 @@ input:checked + .slider:before {
     background-color: #ebbcbc;
 }
 
+#cal_btn_posneg {
+    display: none;
+    /* text-align:center; */
+}
