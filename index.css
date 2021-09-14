@@ -86,7 +86,6 @@ input:checked + .slider:before {
 
 #container {
     display: grid;
-
 }
 
 #cal_container {
@@ -115,7 +114,7 @@ input:checked + .slider:before {
     border-radius: 6px;
     padding: 5px;
     margin-bottom: 10px;
-    width: 200px;
+    width: 240px;
     justify-self:center;
     background-color: beige;
     height: 3em;
@@ -162,32 +161,12 @@ input:checked + .slider:before {
     font-size: 1.5em;
 }
 
-#results2 {
+#results2, #results3 {
     font-size: .75em;
-    text-align:end;
+    text-align: end;
 }
 
-#results3 {
-    font-size: .75em;
-    text-align:end;
-}
-
-#cal_btn_plus {
+#cal_btn_plus, #cal_btn_minus, #cal_btn_multiply, #cal_btn_divide, #cal_btn_equals {
     background-color: #ebbcbc;
 }
 
-#cal_btn_minus {
-    background-color: #ebbcbc;
-}
-
-#cal_btn_multiply {
-    background-color: #ebbcbc;
-}
-
-#cal_btn_divide {
-    background-color: #ebbcbc;
-}
-
-#cal_btn_equals {
-    background-color: #ebbcbc;
-}

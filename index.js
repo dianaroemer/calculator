@@ -173,7 +173,7 @@ function parseButton (e) {
             break;
     }
 
-    // console.log(displayContent);
+    console.log(displayContent);
 
     // Update Display to show new input
     updateDisplay();
@@ -337,4 +337,53 @@ function solve( arr ) {
 }
 
 
+// ----------------------------- Toggle ---------------------------------------
+
+const scientificContainer = document.querySelector("#container");
+const toggle = document.querySelector("#switchValue");
+const resultsLabel = document.getElementById('resultsLabel');
+const displayLabel = document.getElementById('displayLabel');
+
+toggle.checked = true;
+
+toggle.addEventListener('click', pickCalc);
+
+function pickCalc () {
+
+    // console.log(toggle.checked);
+    if(toggle.checked) {
+        results.style.display = "inherit";
+        resultsLabel.style.display = "inherit";
+        displayLabel.style.display = "inherit";
+
+        // Initialize Scientific variables to empty and default states
+        displayContent = [];
+        display.textContent = '';
+        results.textContent = '';
+        results2.textContent = '';
+        results3.textContent = '';
+        display.style.marginBottom = "10px";
+
+        // Add Scientific event listeners
+        calc_btns.forEach( button => button.addEventListener('click', parseButton));
+        // Remove Simplified Event listeners XXXUPDATE
+        
+        
+    } else {
+        results.style.display = "none";
+        resultsLabel.style.display = "none";
+        displayLabel.style.display = "none";
+        display.style.marginBottom = "0px";
+
+        // Initialize Simplified variables to empty and default states 
+        // XXXUPDATEXXX
+
+
+        // Remove Scientific event listeners
+        calc_btns.forEach( button => button.removeEventListener('click', parseButton));
+        // Add Simplified event listeners XXXUPDATEXXX
+
+    }
+
+}
 
