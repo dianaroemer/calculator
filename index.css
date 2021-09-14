@@ -4,6 +4,18 @@ body {
 
 #toggleContainer {
     display: grid;
+    font-size: 1.2em;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    place-self: center center;
+}
+
+#innerToggle {
+    display:grid;
+    height: 40px;
+    place-self: center center;
+    grid-template-columns: auto auto auto;
+    /* background-color: rgb(128, 115, 99); */
 }
 
 .switch {
@@ -11,6 +23,9 @@ body {
     display: inline-block;
     width: 60px;
     height: 36px;
+    align-self: center;
+    margin-left: 15px;
+    margin-right: 14px;
 }
 
 .switch input {
@@ -48,7 +63,7 @@ body {
 }
 
 input:checked + .slider {
-    background-color: #2196F3;
+    background-color: #9ccaf0;
 }
 
 input:checked + .slider:before {
@@ -59,15 +74,11 @@ input:checked + .slider:before {
 
 .slider.round {
     border-radius:12px;
-    
 }
 
 .slider.round:before {
-    border-radius: 40%;
+    border-radius: 50%;
     border-width: 1px;
-    /* border: solid; */
-    /* border: 500px; */
-    
 }
 
 
@@ -121,11 +132,6 @@ input:checked + .slider:before {
     background-color: #bdbcbc;
 }
 
-#cal_btn_zero {
-    grid-area: 5 / 1 / 5 / 3;
-    width: auto;
-}
-
 #cal_btn_equals {
     grid-area: 5 / 3 / 5 / 5;
     width: auto;
@@ -133,7 +139,7 @@ input:checked + .slider:before {
 
 #resultsLabel {
     justify-self: center;
-    font-size: 1.5em;
+    font-size: 1.25em;
 }
 
 #displayLabel {
