@@ -140,13 +140,29 @@ function parseButton (e) {
                 displayContent.push(btnVal);
             }
             break;
+        case "decimal":
+            const hasDecimal = displayContent.findIndex( element => {
+                element == ".";
+            })
+            console.log(hasDecimal);
+
+            if(hasDecimal == -1) {
+                displayContent.push(btnVal);
+            }
+
+            // If there is no decimal in current number, add a decimal, else do nothing
+            // Get current number
+            // Check current number for decimal
+    
+
+            break;
         default:
             // Add button value to displayContent[]
             displayContent.push(btnVal);
             break;
     }
 
-    // console.log(displayContent);
+    console.log(displayContent);
 
     // Update Display to show new input
     updateDisplay();
