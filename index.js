@@ -339,8 +339,6 @@ function solve( arr ) {
 
 // ----------------------------- Toggle ---------------------------------------
 
-
-
 const toggle = document.querySelector("#switchValue");
 toggle.checked = true;
 
@@ -348,8 +346,6 @@ const resultsLabel = document.getElementById('resultsLabel');
 const displayLabel = document.getElementById('displayLabel');
 const cal_btn_posneg = document.getElementById('cal_btn_posneg');
 const cal_btn_backsp = document.getElementById('cal_btn_backsp');
-
-
 
 toggle.addEventListener('click', pickCalc);
 
@@ -374,7 +370,7 @@ function pickCalc () {
         // Add Scientific event listeners
         calc_btns.forEach( button => button.addEventListener('click', parseButton));
         // Remove Simplified Event listeners XXXUPDATE
-        
+        calc_btns.forEach( button => button.removeEventListener('click', parseSimpButton));        
         
     } else {
         display.textContent = ''
@@ -388,12 +384,14 @@ function pickCalc () {
 
         // Initialize Simplified variables to empty and default states 
         // XXXUPDATEXXX
-
+        displaySimpContent = '';
+        prevValue = 0;
 
         // Remove Scientific event listeners
         calc_btns.forEach( button => button.removeEventListener('click', parseButton));
         // Add Simplified event listeners XXXUPDATEXXX
-
+        calc_btns.forEach( button => button.addEventListener('click', parseSimpButton));
+        
     }
 
 }
@@ -401,7 +399,63 @@ function pickCalc () {
 // -------------------------- Parse Simp Buttons ----------------------------
 
 // Intake user input via button or click
-// Parse if button is legal button press
-// If legal button press, render calculator engine to accomodate new state
-// After new state is rendered, update display
+
+let displaySimpContent = '';
+let prevValue = 0;
+
+function parseSimpButton( e ) {
+
+     // Add element to displayContent from e, passed from eventListener
+    const btnVal = e.target.dataset.value;
+    const btnType = e.target.dataset.type;
+
+    switch(btnType) {
+        case "equals":
+            //Do functionality regarding the equals and solve function
+
+            // prevVale = parseFloat(displaySimpContent);
+            // displaySimpContent = '';
+
+
+            break;
+        case "backspace":
+            // Do functionality regarding Backspace
+            displaySimpContent = displaySimpContent.slice(0, -1);
+            break;
+        case "clear":
+            // Do functionality regarding CLEAR
+            displaySimpContent ='';
+            prevValue = 0;
+            break;
+        case "operator":
+            // Add operator to array
+
+            break;
+        case "decimal":
+            // If displaySimpContent has no decimal, add a decimal, else do nothing
+            if( !displaySimpContent.includes('.')) {
+                displaySimpContent += '.';
+            }
+            break;
+        case "posneg":
+            displaySimpContent = parseFloat(displaySimpContent);
+            displaySimpContent *= -1;
+            displaySimpContent = displaySimpContent.toString();
+            break;
+        default:
+            // Add button value to displaySimpContent
+            displaySimpContent += btnVal;
+
+            break;
+    }
+ 
+    console.log(`The value of displaySimpContent is: ${displaySimpContent} and the value of prevValue is ${prevValue}`);
+
+    // Update Display to show new input
+    updateSimpDisplay();
+}
+
+function updateSimpDisplay() {
+    display.textContent = displaySimpContent;
+}
 
