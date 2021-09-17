@@ -385,7 +385,9 @@ function pickCalc () {
         // Initialize Simplified variables to empty and default states 
         // XXXUPDATEXXX
         displaySimpContent = '';
-        prevValue = 0;
+        firstValue = 0;
+        secondValue =0;
+        currentOperator = '';
 
         // Remove Scientific event listeners
         calc_btns.forEach( button => button.removeEventListener('click', parseButton));
@@ -401,7 +403,9 @@ function pickCalc () {
 // Intake user input via button or click
 
 let displaySimpContent = '';
-let prevValue = 0;
+let firstValue = 0;
+let secondValue = 0;
+let currentOperator = '';
 
 function parseSimpButton( e ) {
 
@@ -409,47 +413,97 @@ function parseSimpButton( e ) {
     const btnVal = e.target.dataset.value;
     const btnType = e.target.dataset.type;
 
+
     switch(btnType) {
         case "equals":
             //Do functionality regarding the equals and solve function
 
-            // prevVale = parseFloat(displaySimpContent);
-            // displaySimpContent = '';
-
+            solveCurrent();
+            firstValue = secondValue;
+            currentOperator = '';
 
             break;
         case "backspace":
             // Do functionality regarding Backspace
+            firstValue = firstValue.toString();
+            if(firstValue.length > 1) {
+                firstValue = firstValue.slice(0, -1);
+                firstValue = parseFloat(firstValue);
+            } else {
+                firstValue = 0;
+            }
             displaySimpContent = displaySimpContent.slice(0, -1);
             break;
         case "clear":
             // Do functionality regarding CLEAR
             displaySimpContent ='';
-            prevValue = 0;
+            firstValue = 0;
+            secondValue = 0;
+            currentOperator = '';
             break;
         case "operator":
-            // Add operator to array
+            // Check if can operator is legal on current value by checking whether or not prev value exists
 
+            if(currentOperator) {
+                //Solve current operation before showing new operation
+                solveCurrent();
+                currentOperator = btnVal;
+            } else {
+                switch(btnVal) {
+                    case "+":
+                        displaySimpContent = firstValue.toString()
+                        secondValue = firstValue;
+                        firstValue = 0;
+                        currentOperator = "+";
+                        break;
+                    case "-":
+                        displaySimpContent = firstValue.toString();
+                        secondValue = firstValue;
+                        firstValue = 0;
+                        currentOperator = "-";
+                        break;
+                    case "*":
+                        displaySimpContent = firstValue.toString();
+                        secondValue = firstValue;
+                        firstValue = 0;
+                        currentOperator = "*";
+                        break;
+                    case "/":
+                        displaySimpContent = firstValue.toString();
+                        secondValue = firstValue;
+                        firstValue = 0;
+                        currentOperator = "/";
+                        break;
+                }               
+            }
             break;
         case "decimal":
             // If displaySimpContent has no decimal, add a decimal, else do nothing
-            if( !displaySimpContent.includes('.')) {
-                displaySimpContent += '.';
+            firstValue = firstValue.toString();
+            if (!firstValue.includes('.')) {
+                firstValue += '.';
             }
+            displaySimpContent = firstValue;
+
             break;
         case "posneg":
-            displaySimpContent = parseFloat(displaySimpContent);
-            displaySimpContent *= -1;
-            displaySimpContent = displaySimpContent.toString();
+            firstValue *= -1;
+            displaySimpContent = firstValue.toString();
             break;
         default:
-            // Add button value to displaySimpContent
-            displaySimpContent += btnVal;
+                firstValue = firstValue.toString();
+                if( firstValue == '0' ){
+                    firstValue = btnVal;
+                } else {
+                    firstValue += btnVal;
+                }
+                displaySimpContent = firstValue;
+                firstValue = parseFloat(firstValue);
 
             break;
     }
  
-    console.log(`The value of displaySimpContent is: ${displaySimpContent} and the value of prevValue is ${prevValue}`);
+    console.log(`The value of displaySimpContent is: |${displaySimpContent}| and the value of firstValue is: |${firstValue}|, the value of secondValue is: |${secondValue}|, and the currentOperator is: |${currentOperator}|`);
 
     // Update Display to show new input
     updateSimpDisplay();
@@ -459,3 +513,31 @@ function updateSimpDisplay() {
     display.textContent = displaySimpContent;
 }
 
+function solveCurrent() {
+    switch(currentOperator) {
+        case "+":
+            firstValue = add(firstValue, secondValue);
+            displaySimpContent = firstValue.toString();
+            secondValue = firstValue;
+            firstValue = 0;
+            break;
+        case '-':
+            firstValue = subtract(secondValue, firstValue);
+            displaySimpContent = firstValue.toString();
+            secondValue = firstValue;
+            firstValue = 0;
+            break;
+        case '*':
+            firstValue = multiply(firstValue, secondValue);
+            displaySimpContent = firstValue.toString();
+            secondValue = firstValue;
+            firstValue = 0;
+            break;
+        case '/':
+            firstValue = divide(secondValue, firstValue);
+            displaySimpContent = firstValue.toString();
+            secondValue = firstValue;
+            firstValue = 0;
+            break;
+    }
+}

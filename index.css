@@ -108,6 +108,10 @@ input:checked + .slider:before {
     background-color: rgb(255, 240, 230);
 }
 
+.calc_btn:selected {
+    background-color:blue;
+}
+
 #display {
     border:solid;
     border-width: 2px;
