@@ -367,6 +367,11 @@ function pickCalc () {
         results3.textContent = '';
         display.style.marginBottom = "10px";
 
+        cal_btn_plus.classList.remove('selected');
+        cal_btn_minus.classList.remove('selected');
+        cal_btn_multiply.classList.remove('selected');
+        cal_btn_divide.classList.remove('selected');
+
         // Add Scientific event listeners
         calc_btns.forEach( button => button.addEventListener('click', parseButton));
         // Remove Simplified Event listeners XXXUPDATE
@@ -407,6 +412,12 @@ let firstValue = 0;
 let secondValue = 0;
 let currentOperator = '';
 
+const cal_btn_plus = document.getElementById('cal_btn_plus');
+const cal_btn_minus = document.getElementById('cal_btn_minus');
+const cal_btn_multiply = document.getElementById('cal_btn_multiply');
+const cal_btn_divide = document.getElementById('cal_btn_divide');
+
+
 function parseSimpButton( e ) {
 
      // Add element to displayContent from e, passed from eventListener
@@ -440,6 +451,12 @@ function parseSimpButton( e ) {
             firstValue = 0;
             secondValue = 0;
             currentOperator = '';
+
+            cal_btn_plus.classList.remove('selected');
+            cal_btn_minus.classList.remove('selected');
+            cal_btn_multiply.classList.remove('selected');
+            cal_btn_divide.classList.remove('selected');
+
             break;
         case "operator":
             // Check if can operator is legal on current value by checking whether or not prev value exists
@@ -455,6 +472,9 @@ function parseSimpButton( e ) {
                         secondValue = firstValue;
                         firstValue = 0;
                         currentOperator = "+";
+                        console.log(cal_btn_plus.classList);
+                        cal_btn_plus.classList.toggle('before');
+                        console.log(cal_btn_plus.classList);
                         break;
                     case "-":
                         displaySimpContent = firstValue.toString();

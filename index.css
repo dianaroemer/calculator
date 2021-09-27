@@ -108,9 +108,7 @@ input:checked + .slider:before {
     background-color: rgb(255, 240, 230);
 }
 
-.calc_btn:selected {
-    background-color:blue;
-}
+
 
 #display {
     border:solid;
@@ -177,6 +175,14 @@ input:checked + .slider:before {
 
 #cal_btn_plus, #cal_btn_minus, #cal_btn_multiply, #cal_btn_divide, #cal_btn_equals {
     background-color: #ebbcbc;
+}
+
+/* #cal_btn_plus:checked, #cal_btn_minus:checked {
+    background-color:blue;
+} */
+
+#cal_btn_plus:before {
+    background-color: blue;
 }
 
 #cal_btn_posneg {

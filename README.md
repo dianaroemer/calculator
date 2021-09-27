@@ -6,10 +6,8 @@ https://dominicroemer.github.io/calculator/
 
 
 Current To-Do's:
-Create basic Calculator layout and buttons
-Tie button functionality to event listeners
-Add functionality to event listeners
-
+Bonus Credit from Simp Calc
+Eliminate funky user excess cases - like pressing operators multiple times in a row
 
 
 Here are some use cases (abilities your project needs to have):
